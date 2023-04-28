@@ -41,6 +41,7 @@ def save_diary():
     filename = f'file-{mytime}.{extension}'
     save_to = f'static/{filename}'
     file.save(save_to)
+    time = today.strftime('%Y.%m.%d')
 
     profile = request.files['profile_give']
     extension = profile.filename.split('.')[-1]
@@ -53,7 +54,8 @@ def save_diary():
         'file': save_to,
         'profile':profilename,
         'title' : title_receive,
-        'content' : content_receive
+        'content' : content_receive,
+        'time' : time,
     }
     db.diary.insert_one(doc)
     return jsonify ({'msg': 'data tersimpan'})
